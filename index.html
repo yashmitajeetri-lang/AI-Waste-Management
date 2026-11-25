@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EcoSmart - Waste Management</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8f4;
+    color: #24352b;
+}
+
+header {
+    background: #176b45;
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+header h2 {
+    font-size: 25px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 8px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    color: #b9f5c8;
+}
+
+.hero {
+    text-align: center;
+    padding: 75px 15px;
+    background: linear-gradient(120deg, #d9f5df, #b8e7c4);
+}
+
+.hero h1 {
+    font-size: 38px;
+    color: #176b45;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 17px;
+    margin-bottom: 25px;
+}
+
+.btn {
+    background: #176b45;
+    color: white;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn:hover {
+    background: #0e4d30;
+}
+
+section {
+    padding: 45px 8%;
+}
+
+.section-title {
+    text-align: center;
+    color: #176b45;
+    margin-bottom: 25px;
+    font-size: 27px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 3px 12px #00000012;
+}
+
+.card h3 {
+    margin: 12px 0;
+    color: #176b45;
+}
+
+.card p {
+    line-height: 1.6;
+}
+
+.icon {
+    font-size: 38px;
+}
+
+.detector {
+    max-width: 650px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 3px 12px #00000012;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 13px;
+    margin: 12px 0;
+    border: 1px solid #bbb;
+    border-radius: 6px;
+    font-size: 15px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.result {
+    margin-top: 20px;
+    padding: 18px;
+    background: #e2f6e7;
+    border-radius: 8px;
+    display: none;
+    line-height: 1.7;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    text-align: center;
+}
+
+.stat {
+    background: #176b45;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.stat h2 {
+    font-size: 30px;
+    margin-bottom: 8px;
+}
+
+.report-list {
+    margin-top: 20px;
+}
+
+.report-item {
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border-left: 5px solid #176b45;
+}
+
+footer {
+    background: #123d2a;
+    color: white;
+    text-align: center;
+    padding: 22px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@media(max-width:600px) {
+    header {
+        justify-content: center;
+        text-align: center;
+    }
+
+    nav a {
+        display: inline-block;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>🌱 EcoSmart</h2>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#detector">AI Detector</a>
+        <a href="#guide">Disposal Guide</a>
+        <a href="#report">Report Waste</a>
+        <a href="#dashboard">Dashboard</a>
+    </nav>
+</header>
+
+<div class="hero" id="home">
+    <h1>Smart Waste Management System</h1>
+    <p>Identify waste, improve recycling and build a cleaner environment.</p>
+    <a href="#detector" class="btn">Identify Your Waste</a>
+</div>
+
+<section id="about">
+    <h2 class="section-title">About EcoSmart</h2>
+    <div class="card">
+        <p>
+        EcoSmart is a smart waste management website that helps
+        people identify different types of waste and understand
+        the correct disposal methods. It encourages waste
+        segregation, recycling and environmental protection.
+        </p>
+    </div>
+</section>
+
+<section id="detector">
+    <h2 class="section-title">🤖 Smart Waste Detector</h2>
+
+    <div class="detector">
+        <p>Enter the name of your waste item:</p>
+
+        <input type="text" id="wasteInput"
+        placeholder="Example: Plastic bottle, banana peel...">
+
+        <button class="btn" onclick="detectWaste()">
+            Identify Waste
+        </button>
+
+        <div class="result" id="result"></div>
+    </div>
+</section>
+
+<section id="guide">
+    <h2 class="section-title">Waste Segregation Guide</h2>
+
+    <div class="cards">
+
+        <div class="card">
+            <div class="icon">🍃</div>
+            <h3>Wet Waste</h3>
+            <p>Food leftovers, fruit peels and vegetable waste.
+            Suitable organic waste can be composted.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">📦</div>
+            <h3>Dry Waste</h3>
+            <p>Paper, cardboard and clean packaging.
+            Keep recyclable materials separate.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">♻️</div>
+            <h3>Recyclable Waste</h3>
+            <p>Clean plastic, glass and metal items.
+            Send them to appropriate recycling facilities.</p>
+        </div>
+
+        <div class="card">
+            <div class="icon">⚠️</div>
+            <h3>Special Waste</h3>
+            <p>Batteries, electronic waste and other
+            hazardous household items need authorized collection.</p>
+        </div>
+
+    </div>
+</section>
+
+<section id="report">
+    <h2 class="section-title">Report Waste Problems</h2>
+
+    <div class="detector">
+        <input type="text" id="person"
+        placeholder="Enter your name">
+
+        <input type="text" id="place"
+        placeholder="Enter location">
+
+        <textarea id="problem"
+        placeholder="Describe the waste problem"></textarea>
+
+        <button class="btn" onclick="submitReport()">
+            Submit Report
+        </button>
+
+        <div class="result" id="reportMessage"></div>
+    </div>
+</section>
+
+<section id="dashboard">
+    <h2 class="section-title">Waste Management Dashboard</h2>
+
+    <div class="stats">
+        <div class="stat">
+            <h2 id="total">0</h2>
+            <p>Total Reports</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="wet">0</h2>
+            <p>Wet Waste Types</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="dry">0</h2>
+            <p>Dry Waste Types</p>
+        </div>
+
+        <div class="stat">
+            <h2 id="special">0</h2>
+            <p>Special Waste Types</p>
+        </div>
+    </div>
+
+    <div class="report-list">
+        <h3>Recent Waste Reports</h3>
+        <div id="reports"></div>
+    </div>
+</section>
+
+<footer>
+    <p>© 2026 EcoSmart | AI-Based Waste Management System</p>
+    <p>Reduce • Reuse • Recycle 🌍</p>
+</footer>
+
+<script>
+
+// Waste identification data
+
+const wasteData = {
+    "banana peel": ["Wet Waste", "Suitable for composting."],
+    "vegetable": ["Wet Waste", "Separate organic waste for composting."],
+    "food": ["Wet Waste", "Food leftovers can be composted where appropriate."],
+    "paper": ["Dry Waste", "Keep paper clean and dry for recycling."],
+    "cardboard": ["Dry Waste", "Flatten and send for recycling."],
+    "plastic bottle": ["Recyclable Waste", "Empty and clean before recycling."],
+    "glass bottle": ["Recyclable Waste", "Keep separate and handle carefully."],
+    "metal can": ["Recyclable Waste", "Clean and send to a recycling facility."],
+    "battery": ["Special Waste", "Use an authorized battery collection point."],
+    "mobile phone": ["Special Waste", "Send electronic waste to an authorized e-waste centre."]
+};
+
+let counts = {
+    wet: 0,
+    dry: 0,
+    special: 0
+};
+
+// Load saved reports
+
+let savedReports = JSON.parse(
+    localStorage.getItem("ecoReports") || "[]"
+);
+
+function detectWaste() {
+
+    let input = document.getElementById("wasteInput")
+        .value.trim().toLowerCase();
+
+    let result = document.getElementById("result");
+
+    if (input === "") {
+        alert("Please enter a waste item.");
+        return;
+    }
+
+    let found = wasteData[input];
+
+    if (!found) {
+        result.innerHTML =
+        "<b>Category:</b> Not identified<br>" +
+        "Try banana peel, paper, plastic bottle, battery or another listed item.";
+        result.style.display = "block";
+        return;
+    }
+
+    let category = found[0];
+    let advice = found[1];
+
+    result.innerHTML =
+        "<h3>Identification Result</h3>" +
+        "<b>Waste Item:</b> " + input + "<br>" +
+        "<b>Category:</b> " + category + "<br>" +
+        "<b>Disposal Advice:</b> " + advice;
+
+    result.style.display = "block";
+
+    if (category === "Wet Waste") {
+        counts.wet++;
+    } else if (category === "Dry Waste" ||
+               category === "Recyclable Waste") {
+        counts.dry++;
+    } else {
+        counts.special++;
+    }
+
+    updateDashboard();
+}
+
+// Submit waste report
+
+function submitReport() {
+
+    let name = document.getElementById("person").value.trim();
+    let place = document.getElementById("place").value.trim();
+    let problem = document.getElementById("problem").value.trim();
+
+    if (!name || !place || !problem) {
+        alert("Please fill all the fields.");
+        return;
+    }
+
+    let report = {
+        name: name,
+        place: place,
+        problem: problem
+    };
+
+    savedReports.unshift(report);
+
+    localStorage.setItem(
+        "ecoReports",
+        JSON.stringify(savedReports)
+    );
+
+    document.getElementById("reportMessage").innerHTML =
+        "Your report has been saved successfully!";
+
+    document.getElementById("reportMessage").style.display = "block";
+
+    document.getElementById("person").value = "";
+    document.getElementById("place").value = "";
+    document.getElementById("problem").value = "";
+
+    updateDashboard();
+}
+
+// Update dashboard
+
+function updateDashboard() {
+
+    document.getElementById("total").innerText =
+        savedReports.length;
+
+    document.getElementById("wet").innerText =
+        counts.wet;
+
+    document.getElementById("dry").innerText =
+        counts.dry;
+
+    document.getElementById("special").innerText =
+        counts.special;
+
+    let reportHTML = "";
+
+    savedReports.forEach(function(report) {
+
+        reportHTML += `
+        <div class="report-item">
+            <b>Name:</b> ${escapeHTML(report.name)}<br>
+            <b>Location:</b> ${escapeHTML(report.place)}<br>
+            <b>Problem:</b> ${escapeHTML(report.problem)}
+        </div>
+        `;
+
+    });
+
+    document.getElementById("reports").innerHTML =
+        reportHTML || "<p>No reports submitted yet.</p>";
+}
+
+// Display saved reports on page load
+
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char];
+    });
+}
+
+updateDashboard();
+
+</script>
+
+</body>
+</html>
